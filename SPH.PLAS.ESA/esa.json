@@ -1,0 +1,127 @@
+{
+  "WorkspacePath": "C:\\supermap\\test.smwu",
+  "DatasourcePath": "C:\\supermap\\udb",
+  "SourceDatasourceName": "icgis",
+  "TargetDatasourceName": "emg",
+  "UdbLifePeriod": 10,
+  "Datasets": {
+    "PIPELINE": {
+      "Type": "PIPELINE",
+      "Name": "GAS_PIPE",
+      "Fields": {
+        "Code": "PIPE_MNG_NO",
+        "KeyValue": "PIPE_CHRCTR_NO",
+        "Label": "PROJECT_ID",
+        "Name": "GAS_OPEN_DT",
+        "ConstNo": "PROJECT_ID",
+        "Diameter": "PIPDMTR_CD",
+        "Length": "PIPE_LEN",
+        "Material": "QMAT_CD",
+        "PressureType": "PRSR_DVSN_CD",
+        "ServiceStat": "ENABLED",
+        "PipeType": "PIPE_KIND_CD",
+        "PipeId": "FILE_DONG_CD||FILE_DVSN_CD||FILE_NO"
+      },
+      "Where": "1=1"
+    },
+    "REGULATOR": {
+      "Type": "REGULATOR",
+      "Name": "GOV",
+      "Fields": {
+        "Code": "GOV_KIND_CD",
+        "KeyValue": "GOV_ID",
+        "Label": "GOV_MNG_NO",
+        "Name": "GOV_NM",
+        "ConstNo": "PROJECT_ID",
+        "ServiceStat": "ENABLED",
+        "NodeType": "4"
+      },
+      "Where": "GOV_KIND_CD in ('단독정압기','지구정압기','지역정압기','압력조정기','구역형압력조정기')"
+    },
+    "VALVE": {
+      "Type": "VALVE",
+      "Name": "VALVE",
+      "Fields": {
+        "Code": "VALVE_MNG_NO",
+        "KeyValue": "VALVE_ID",
+        "Label": "Substr(EMDONG,0,Length(EMDONG)-1)||SECOND_LABEL_NO",
+        "Name": "PROJECT_NAME",
+        "ConstNo": "PIPE_MNG_NO",
+        "OpenYN": "ISOPEN",
+        "ServiceStat": "ENABLED",
+        "NodeType": "3"
+      },
+      "Where": "1=1"
+    },
+    "BUILDING": {
+      "Type": "BUILDING",
+      "Name": "USE_GROUP",
+      "Fields": {
+        "Code": "REP_RESRC",
+        "Name": "REP_RESOURCE_NAME_FST",
+        "KeyValue": "REP_RESRC",
+        "PipeId": "FILE_DONG_CD||FILE_DVSN_CD||FILE_NO",
+        "Type": "SUP_ITRP_IMPRT_EQUIP"
+      },
+      "Where": "1 = 1"
+    }
+  },
+  "LogConfig": {
+    "LogLevel": "info",
+    "FilePath": "C:\\supermap\\logs\\log.log",
+    "IsConsole": true
+  },
+  "SourceNodeWhere": "Code = '지구정압기'",
+  "LpSourceNodeWhere": "Code in ('지역정압기','구역형압력조정기')",
+  "ValveOpenValue": "'Y'",
+  "IsValveWhere": "(NodeType=3 or NodeType=4) AND Code != '지구정압기'",
+  "LPValue": "'저압'",
+  "ExportDatasets": [
+    /*"ADMIN_BUBJUNG",
+    "ADMIN_GU",
+    "Base_Road",
+    "BLDG",
+    "Bldg_Fense",
+    "Bldg_Name",
+    "Bldg_Symbol",
+    "CONFIRM_SEG",
+    "Contour",
+    "Depth_Anno",
+    "Depth_Line",
+    "Depth_Pt",
+    "DETAIL_MAP",
+    "Elevation",
+    "Fac_Etc",
+    "Fac_Etc_Line",
+    "Fac_Safe",
+    "Fac_Text",
+    "GAS_PIPE",
+    "GENERATOR",
+    "GOV",
+    "Ground_Bnd",
+    "Ground_Bnd",
+    "JIBUN",
+    "New_Map",
+    "PICTURE_PT",
+    "PIPE_OFF",
+    "Pipe_Plan",
+    "Pipe_SE_Pt",
+    "Pipe_UpDown",
+    "POI_NAME",
+    "Rail",
+    "Road_Center",
+    "Road_Fac",
+    "Road_OccupyFac",
+    "Road_SubFac",
+    "SECTOR_BND",
+    "SWL_PIPE_A",
+    "TB",
+    "TB_LINE",
+    "USE_GROUP",
+    "VALVE",
+	"VALVE_MAIN",
+	"USER_PIPE",
+	"USER_FAC",*/
+	"CODE_BUBJUNG"
+  ]
+}
