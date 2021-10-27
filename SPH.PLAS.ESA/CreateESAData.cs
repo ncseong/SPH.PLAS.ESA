@@ -12,6 +12,7 @@ namespace SPH.PLAS.ESA
     public class CreateESAData
     {
         private Workspace m_workspace;
+
         private ESAProperties m_properties;
         private IStandardLog m_standardLog;
         private readonly double m_tolerance = 0.005;
