@@ -12,7 +12,6 @@ namespace SPH.PLAS.ESA
     public class CreateESAData
     {
         private Workspace m_workspace;
-
         private ESAProperties m_properties;
         private IStandardLog m_standardLog;
         private readonly double m_tolerance = 0.005;
@@ -746,7 +745,7 @@ namespace SPH.PLAS.ESA
                         if ("4".Equals(sourceRs.GetString("NodeType"))){
                             rgltIds.Add(id);
                         }
-                        if (obj != null && !obj.Equals(m_properties.ValveOpenValue.Replace("'","")))
+                        if (obj != null && obj.Equals(m_properties.ValveCloseValue.Replace("'","")))
                         {
                             barrierIds.Add(id);
                         }

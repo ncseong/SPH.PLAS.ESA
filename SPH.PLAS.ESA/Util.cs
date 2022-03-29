@@ -12,6 +12,7 @@ namespace SPH.PLAS.ESA
     {
         public static byte[] ConvertToByteArray(int [] array)
         {
+            if (array == null || array.Length == 0) { return null; }
             byte[] result = new byte[array.Length * 4];
             for(int i = 0; i<array.Length; i++)
             {
@@ -23,6 +24,7 @@ namespace SPH.PLAS.ESA
 
         public static int[] ConvertToIntArray(byte[] array)
         {
+            if(array == null || array.Length == 0) { return new int[0]; }
             int[] result = new int[array.Length / 4];
             for(int i = 0; i<array.Length; i+=4)
             {

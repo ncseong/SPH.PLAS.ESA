@@ -13,11 +13,11 @@ namespace SPH.PLAS.ESA
         public LogProperties LogConfig { get; set; }
         public string SourceNodeWhere { get; set; }
         public string LpSourceNodeWhere { get; set; }
-        public string ValveOpenValue { get; set; }
+        public string ValveCloseValue { get; set; }
         public string IsValveWhere { get; set; }
         public string LPValue { get; set; }
         public List<string> ExportDatasets { get; set; }
-        public ESAProperties(string workspacePath, string datasourcePath, string sourceDatasourceName, string targetDatasourceName, int udbLifePeriod, LogProperties logConfig, Dictionary<string, DatasetProperties> datasets, string sourceNodeWhere, string lpSourceNodeWhere, string valueOpenValue, string isValveWhere, string lpValue, List<string> exportDatasets)
+        public ESAProperties(string workspacePath, string datasourcePath, string sourceDatasourceName, string targetDatasourceName, int udbLifePeriod, LogProperties logConfig, Dictionary<string, DatasetProperties> datasets, string sourceNodeWhere, string lpSourceNodeWhere, string valueCloseValue, string isValveWhere, string lpValue, List<string> exportDatasets)
         {
             WorkspacePath = workspacePath;
             DatasourcePath = datasourcePath;
@@ -28,7 +28,7 @@ namespace SPH.PLAS.ESA
             Datasets = datasets;
             SourceNodeWhere = sourceNodeWhere;
             LpSourceNodeWhere = lpSourceNodeWhere;
-            ValveOpenValue = valueOpenValue;
+            ValveCloseValue = valueCloseValue;
             IsValveWhere = isValveWhere;
             LPValue = lpValue;
             ExportDatasets = exportDatasets;

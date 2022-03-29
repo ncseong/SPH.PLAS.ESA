@@ -73,7 +73,7 @@
   },
   "SourceNodeWhere": "Code = '지구정압기'",
   "LpSourceNodeWhere": "Code in ('지역정압기','구역형압력조정기')",
-  "ValveOpenValue": "'Y'",
+  "ValveCloseValue": "''",
   "IsValveWhere": "(NodeType=3 or NodeType=4) AND Code != '지구정압기'",
   "LPValue": "'저압'",
   "ExportDatasets": [
