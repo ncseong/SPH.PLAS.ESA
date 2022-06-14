@@ -444,8 +444,8 @@ namespace SPH.PLAS.ESA
             param.HasGeometry = false;
             param.ResultFields = new string[] { "SmID, SmNodeID" };
             param.CursorType = CursorType.Static;
-            param.AttributeFilter = string.Format("NodeType = 4 AND SmNodeID in ({0})", string.Join(",", checkRgltNodes));
-            param.GroupBy = new string[] { "SmNodeID HAVING RGLT_CNT != count(*)" };
+            param.AttributeFilter = string.Format("RGLT_GROUP = (SELECT RGLT_GROUP FROM NETWORK_NODE WHERE NodeType = 4 AND SmNodeID in ({0}) GROUP BY RGLT_GROUP HAVING RGLT_CNT!=COUNT(*))", string.Join(",", checkRgltNodes));
+            //param.GroupBy = new string[] { "SmNodeID HAVING RGLT_CNT != count(*)" };
             using(Recordset rs = nodeDv.Query(param))
             {
                 while (!rs.IsEOF)
@@ -581,7 +581,6 @@ namespace SPH.PLAS.ESA
             
             //2차 차단 밸브, 정압기
             secondValves.ExceptWith(firstValves);
-
             FacilityAnalystSetting setting = analyst.AnalystSetting;
             HashSet<int> barrierNodes = GetClosingRegulator(analyst, nodeIds.RgltNodeIds, secondValves);
             barrierNodes.UnionWith(setting.BarrierNodes);
