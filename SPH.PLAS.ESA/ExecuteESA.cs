@@ -438,6 +438,7 @@ namespace SPH.PLAS.ESA
                 if (result != null)
                 {
                     checkRgltNodes.UnionWith(result.Nodes);
+                    checkRgltNodes.Remove(valveId);
                 }
             }
             QueryParameter param = new QueryParameter();
