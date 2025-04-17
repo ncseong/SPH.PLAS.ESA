@@ -429,22 +429,32 @@ namespace SPH.PLAS.ESA
         private HashSet<int> GetClosingRegulator(FacilityAnalyst analyst, int[] rgltIds, HashSet<int> checkValves)
         {
             DatasetVector nodeDv = analyst.AnalystSetting.NetworkDataset.ChildDataset;
+            DatasetVector edgeDv = analyst.AnalystSetting.NetworkDataset;
             HashSet<int> closingNodes = new HashSet<int>();
             HashSet<int> checkRgltNodes = new HashSet<int>();
             checkRgltNodes.UnionWith(checkValves);
-            foreach (int valveId in checkValves)
-            {
-                FacilityAnalystResult result = analyst.FindCriticalFacilitiesDownFromNode(rgltIds, valveId, true);
-                if (result != null)
-                {
-                    checkRgltNodes.UnionWith(result.Nodes);
-                    checkRgltNodes.Remove(valveId);
-                }
-            }
             QueryParameter param = new QueryParameter();
             param.HasGeometry = false;
-            param.ResultFields = new string[] { "SmID, SmNodeID" };
             param.CursorType = CursorType.Static;
+            foreach (int valveId in checkValves)
+            {
+                int recordCnt = 0;
+                param.AttributeFilter = string.Format("(SmFNode = {0} or SmTNode = {0}) AND Direction != 2", valveId);
+                using (Recordset rs = edgeDv.Query(param))
+                {
+                    recordCnt = rs.RecordCount;
+                }
+                if (recordCnt > 0)
+                {
+                    FacilityAnalystResult result = analyst.FindCriticalFacilitiesDownFromNode(rgltIds, valveId, true);
+                    if (result != null)
+                    {
+                        checkRgltNodes.UnionWith(result.Nodes);
+                        checkRgltNodes.Remove(valveId);
+                    }
+                }
+            }
+            param.ResultFields = new string[] { "SmID, SmNodeID" };
             param.AttributeFilter = string.Format("RGLT_GROUP in (SELECT RGLT_GROUP FROM NETWORK_NODE WHERE NodeType = 4 AND SmNodeID in ({0}) GROUP BY RGLT_GROUP HAVING RGLT_CNT!=COUNT(*))", string.Join(",", checkRgltNodes));
             //param.GroupBy = new string[] { "SmNodeID HAVING RGLT_CNT != count(*)" };
             using(Recordset rs = nodeDv.Query(param))
